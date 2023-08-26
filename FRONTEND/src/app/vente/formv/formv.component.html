@@ -1,0 +1,91 @@
+<div class="card-body bg-secondary-bg">
+    <div class="">
+        <form  >
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label for="validationDefault01" class="form-label">Libelle</label>
+                            <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                                >
+                        </div>                     
+                            <div class="col-md-7">
+                                <label for="validationDefault01" class="form-label">categorie</label>
+                                <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                                    >
+                            </div>
+                    </div>
+                    <div class="row mt-4">                    
+                            <div class="ml-5">
+                                <label for="validationDefault01" class="form-label">Promo</label>
+                                <input  id="promo" formControlName="libelle" type="checkbox" class="form-control " id="validationDefault01" 
+                                    >
+                            </div>
+                            <div class="col-md-5 ml-5">
+                                <label for="promo">Valeur</label>
+                                <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                                    >
+                            </div> 
+                    </div>
+                    <!-- Article de confection  -->
+                    <div class="col-md-10">
+                        <label for="validationDefault01" class="form-label">Prix</label>
+                        <input formControlName="prix" type="number" class="form-control" id="validationDefault01" 
+                            
+                           >
+                    </div>
+                    <div class="col-md-10">
+                        <label for="validationDefault01" class="form-label">Stock</label>
+                        <input formControlName="stock" type="number" class="form-control" id="validationDefault01" 
+                    
+                          >
+                    </div>
+                    <div class="col-md-10">
+                        <label for="validationDefault04" class="form-label">Categorie</label>
+                        
+                            <select class="form-control"   id="validationDefault04" formControlName="categorie" >
+                                <option value="">Selectionner categorie</option>
+                                <option ></option>
+                            </select>
+                        
+                    </div>
+                    <div class="col-md-10 ml-3 --bs-light-border-subtle mt-2 border-dark">
+                        <div class="row" >
+                            <span class="bg-danger border-radius-50 text-white ml-2 fs-5"  >x</span>      
+                        </div>
+                    </div>
+                    <div class="col-md-10 mt-3">
+                        <div class="mt-2" for="">Fournisseur</div>
+                    <input type="text"  formControlName="fournisseur"  placeholder="Rechercher un fournisseur">
+                    </div>
+                     <div class="form-check" >
+                        <input class="form-check-input"  type="checkbox"   value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                         
+                        </label>
+                      </div> 
+                </div>
+                <div class="col border-dark ml-5" >
+                    <div class="image-upload-container col-md-6 ml-5 mt-4 ">
+                        <label for="photo" class="image-frame">
+                            <img [src]="" src="" alt=""   style="width: 200px;height: 200px;object-fit: cover; border-radius: 50%; border: 2px solid;" >                              
+                            <input type="file" id="photo" name="file" formControlName="photo"   style="display: none;">
+                        </label>
+                    </div>
+                    
+                    <div class="col-md-10 mt-2">
+                        <label for="validationDefault01" class="form-label ml-5">Reference</label>
+                        <input formControlName="reference"   type="text" class="form-control" id="validationDefault01" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex mt-4 justify-content-center align-items-center">
+            <button   type="submit"  class="form-control col-2 btn "
+           
+            >
+                Enregistrer
+            </button>
+            </div>
+        </form>   
+    </div>  
+</div>

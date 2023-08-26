@@ -1,0 +1,17 @@
+<div class="card mt-3" *ngIf="dataArticle">
+    <div class="card-header  d-flex justify-content-center align-items-center shadow text-dark">
+        <h4>Liste des Articles</h4>
+    </div>
+    <form action="" [formGroup]="listerArticle">
+      <app-item  
+        [itemArticle]="itemArticle" 
+        [dataArticle]="dataArticle" 
+        [currentPage]="page"
+        [itemsPerPage]="itemsPerPage"
+        [totalItems]="totalItems"
+        (editerData)="receiveEditer($event)"
+        (supprimer)="suppressionArticle($event)"
+      ></app-item>
+      
+    </form>
+  </div>

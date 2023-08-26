@@ -1,0 +1,81 @@
+<div class="card-body bg-secondary-bg">
+    <div class="">
+        <form  [formGroup]="formulaire" >
+            <div class="row">
+                <div class="col">
+                    <div class="col-md-10">
+                        <div class="bg-success text-white">
+                            <span ></span>
+                        </div>
+                        <label for="validationDefault01" class="form-label">Libelle</label>
+                        <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                            >
+                    </div>
+                    <div class="col-md-10">
+                        <label for="validationDefault01" class="form-label">Prix</label>
+                        <input formControlName="prix" type="number" class="form-control" id="validationDefault01" 
+                            
+                           >
+                    </div>
+                    <div class="col-md-10">
+                        <label for="validationDefault01" class="form-label">Stock</label>
+                        <input formControlName="stock" type="number" class="form-control" id="validationDefault01" 
+                    
+                          >
+                    </div>
+                    <div class="col-md-10">
+                        <label for="validationDefault04" class="form-label">Categorie</label>
+                        
+                            <select class="form-control"   id="validationDefault04" formControlName="categorie" >
+                                <option value="">Selectionner categorie</option>
+                                <option *ngFor="let categ of ResponseCategorie">{{categ.libelle}}</option>
+                            </select>
+                        
+                    </div>
+                    <div class="col-md-10 ml-3 --bs-light-border-subtle mt-2 border-dark">
+                        <div class="row" *ngFor="let four of selectedFournisseurs">
+                            {{ four     
+                              }}
+                            <span class="bg-danger border-radius-50 text-white ml-2 fs-5" (click)="vider(four)" >x</span>      
+                        </div>
+                    </div>
+                    <div class="col-md-10 mt-3">
+                        <div class="mt-2" for="">Fournisseur</div>
+                    <input type="text" (input)="SeachFournisseur()" formControlName="fournisseur"  placeholder="Rechercher un fournisseur">
+                    </div>
+                     <div class="form-check" *ngFor="let fournisseur of searchResults ">
+                        <input class="form-check-input"  [checked]="selection" type="checkbox" (click)="addSelectedFournisseur(fournisseur?.libelle)"  value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                          {{fournisseur.libelle}}
+                        </label>
+                      </div> 
+                </div>
+                <div class="col border-dark ml-5" >
+                    <div class="image-upload-container col-md-6 ml-5 mt-4 ">
+                        <label for="photo" class="image-frame">
+                            <img [src]="uploadedImageUrl" src="" alt=""   style="width: 400px;height: 300px;object-fit: cover;" >                              
+                            <input type="file" id="photo" name="file" formControlName="photo"  (change)="onImageChange($event)" style="display: none;">
+                        </label>
+                    </div>
+                    <!-- <div class="image-upload-container col-md-6 ml-5 mt-4 ">
+                        <label for="image" class="image-frame">
+                            <img  alt=""   style="width: 400px;height: 300px;object-fit: cover;" >                              
+                            <input type="file" id="image" name="file" formControlName="image"  style="display: none;">
+                        </label>
+                    </div> -->
+                    <div class="col-md-10 mt-2">
+                        <label for="validationDefault01" class="form-label ml-5">Reference</label>
+                        <input formControlName="reference"   type="text" class="form-control" id="validationDefault01" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-flex mt-4 justify-content-center align-items-center">
+            <button   type="submit"  class="form-control col-2 btn "
+           
+            >
+                Enregistrer
+            </button>
+            </div>
+        </form>   
+    </div>  
+</div>

@@ -1,0 +1,86 @@
+<div class="card mt-3">
+    <div class=" bg-primary card-header d-flex justify-content-center align-items-center shadow text-dark">
+        <h4 class="text-white">AJOUTER ARTICLE</h4>
+    </div>
+    <div class="card-body bg-secondary-bg">
+        <div class="">
+            <form  [formGroup]="formulaire" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col">
+                        <div class="col-md-10">
+                            <div class="bg-success text-white">
+                                <span >{{message}}</span>
+                            </div>
+                            <label for="validationDefault01" class="form-label">Libelle</label>
+                            <input (input)="onChangeCategorie()" formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                                [ngClass]="{'border-danger is-invalid': formulaire.controls['libelle'].invalid && (formulaire.controls['libelle'].touched ||formulaire.controls['libelle'].dirty), 'border-success is-valid': formulaire.controls['libelle'].valid && (formulaire.controls['libelle'].touched ||formulaire.controls['libelle'].dirty)}"
+                                required>
+                                <div *ngIf="formulaire.controls['libelle'].invalid && (formulaire.controls['libelle'].touched ||formulaire.controls['libelle'].dirty)">
+                                    <!-- Le libelle doit etre requi -->
+                                    <!-- <div *ngIf="formulaire.controls['libelle'].hasError('required')" class="valid-tooltip">
+                                    </div> -->
+                                </div>
+                                <div *ngIf="formulaire.controls['libelle'].hasError('minlength')" class="text-danger invalid-feedback"> 
+                                    Le libellé doit comporter au moins 4 caractères.
+                                </div>
+                                <div *ngIf="formulaire.controls['libelle'].hasError('pattern')" class="text-success">
+                                    Le libellé doit contenir uniquement des lettres.
+                                </div>
+                        </div>
+                        <div class="col-md-10">
+                            <label for="validationDefault01" class="form-label">Prix</label>
+                            <input formControlName="prix" type="number" class="form-control is-invalid" id="validationDefault01" 
+                                [ngClass]="{'border-danger is-invalid': formulaire.controls['prix'].invalid && (formulaire.controls['prix'].touched ||formulaire.controls['prix'].dirty), 'border-success is-valid': formulaire.controls['prix'].valid && (formulaire.controls['prix'].touched ||formulaire.controls['prix'].dirty)}"
+                                required>
+                        </div>
+                        <div class="col-md-10">
+                            <label for="validationDefault01" class="form-label">Stock</label>
+                            <input formControlName="stock" type="number" class="form-control is-invalid" id="validationDefault01" 
+                                 [ngClass]="{'border-danger is-invalid': formulaire.controls['stock'].invalid && (formulaire.controls['stock'].touched ||formulaire.controls['stock'].dirty), 'border-success is-valid': formulaire.controls['stock'].valid && (formulaire.controls['stock'].touched ||formulaire.controls['stock'].dirty)}"
+                                required>
+                        </div>
+                        <div class="col-md-10">
+                            <label for="validationDefault04" class="form-label">Categorie</label>
+                            
+                                <select class="form-control" (click)="onChangeCategorie()"  id="validationDefault04" formControlName="categorie" >
+                                    <option value="">Selectionner categorie</option>
+                                    <option selected  *ngFor="let item of dataCategorie" [value]="item?.libelle" >{{item?.libelle}}</option>
+                                </select>
+                            
+                        </div>
+                        <div class="col-md-10 mt-3">
+                            <div class="mt-2" for="">Fournisseur</div>
+                        <input type="text" formControlName="rechercher" (input)="searchFournisseurs()" placeholder="Rechercher un fournisseur">
+                        <ul *ngIf="searchResults ">
+                            <div *ngFor="let fournisseur of searchResults"   [ngStyle]="{'cursor':'pointer'}"  (click)="addSelectedFournisseur(fournisseur.libelle)" >
+                                {{ fournisseur.libelle }}<span></span>
+                            </div>
+                        </ul>
+                            
+                            <input type="text"  (click)="vider()"  [value]="updateSearchTerm()" class="form-control mt-2" name="fournisseur" formControlName="fournisseur" readonly>
+                        </div> 
+                    </div>
+                    <div class="col border-dark ml-5" >
+                        <div class="image-upload-container col-md-6 ml-5 mt-4 ">
+                            <label for="image" class="image-frame">
+                                <img [src]="uploadedImageUrl" alt=""   style="width: 400px;height: 300px;object-fit: cover;" >                              
+                                <input type="file" id="image" name="file" formControlName="image"  (change)="onImageChange($event)" style="display: none;">
+                            </label>
+                        </div>
+                        <div class="col-md-10 mt-2">
+                            <label for="validationDefault01" class="form-label ml-5">Reference</label>
+                            <input formControlName="reference"   type="text" class="form-control" id="validationDefault01" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex mt-4 justify-content-center align-items-center">
+                <button   type="submit" [disabled]="formulaire.invalid" class="form-control col-2 btn "
+                [ngClass]="{'btn-success': isEditer, 'btn-primary': !isEditer}"
+                >
+                    {{ isEditer  ? 'Modifier' : 'Enregistrer' }}
+                </button>
+                </div>
+            </form>   
+        </div>  
+    </div>
+  </div>

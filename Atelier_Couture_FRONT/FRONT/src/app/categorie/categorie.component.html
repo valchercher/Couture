@@ -1,0 +1,74 @@
+<div class="container shadow border bg-white mt-5 w-75">
+    <div class="container mt-5 " >
+      <h1 class="text-primary text-decoration-underline">Ajouter une catégorie</h1>
+      <!-- <form #formGroup="ngForm" id="category-form"> -->
+        <div class="row d-flex justify-content center">
+          <div class="form-group col-5" >
+            <div class="bg-success text-white d-flex justify-content-center align-items-center  h-45" >{{messageConfirm}}</div>
+            <label for="category-input">Libellé de la catégorie</label>
+            <input (input)="isLibelleExiste()"   [(ngModel)]="inputValue" type="text" class="form-control" id="category-input" placeholder="Entrez la catégorie" >
+            <span [ngStyle]="{'color':'red'}" [(ngModel)]="contentText">{{message}}</span>
+          </div>
+          <div>
+            <select name="" id=""  class="form-control" (click)="typeCategorie($event)" style="margin-top: 32px;">
+              <option value="">type categorie</option>
+              <option value="" *ngFor="let type of typeCateg">{{type}}</option>
+              
+            </select>
+          </div>
+          <div class="form-group ml-2" style="margin-top: 30px;">
+            <button [disabled]="boutton"   [hidden]="" (click)="ajouterCategorie()" type="submit" class="btn btn-primary">OK</button>
+          </div>
+          <div class="form-group " style="margin-top: 30px;margin-left: 100px;">
+            <button (click)="supprimerLibelle()" type="submit" class="btn btn-danger " [disabled]="desactiveSupp">suppimer</button>
+          </div>
+          <div style="font-size: 22px; margin-left: 150px; margin-top: 30px;" class="form-group   row">
+            <span  [ngStyle]="{'color':textColorAjout}" class="mr-2" for="onOff">Ajouter</span>
+            <div   class="custom-control custom-switch mt-2">
+              <input  (click)="toggleClick()" type="checkbox" [(ngModel)]="toggleValue" class="custom-control-input fs-1" id="onOff" checked>
+              <label class="custom-control-label" for="onOff"></label>
+            </div>
+            <span [ngStyle]="{'color':textColor}" class="mr-4 editer" >Editer</span>
+          </div>
+        </div>
+      <!-- </form> -->
+      <hr class="border-dark">
+      <h2>Liste des catégories</h2>
+      <ul id="category-list" class="list-group">
+        <!-- Les catégories seront ajoutées ici -->
+      </ul>
+      <div class="container ">
+        <input [(ngModel)]="selectValue"  [checked]="selectALL"  (change)="selectionnerAll()" type="checkbox" [disabled]="!toggleValue" id="" value="">
+        <input [disabled]="!toggleValue" for=""  class="ml-2 fs-25 text-primary" value="Libelle" readonly> 
+        <div class="form-check mt-2" *ngFor="let donee of donnee?.data.data|paginate:{itemsPerPage:tableSize,currentPage:page,totalItems:tableSizes}; let i=index">
+
+          <input [disabled]="!toggleValue" [checked]="selectedIds"   (click)="checkedClick()" [(ngModel)]="donee.checked" class="form-check-input " type="checkbox" value="" id="flexCheckDefault"  >
+
+          <input [disabled]="!toggleValue"  (focus)="inputFocus(donee?.libelle,donee?.id)"  [ngStyle]="{ 'cursor': isClickable }"  type="text" value="{{donee?.libelle}}" placeholder="libelle" readonly>
+
+        </div>
+        <div class="mt-5">
+          <pagination-controls 
+        
+          (pageChange)="onTableDataChange($event)">
+
+          </pagination-controls>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col">
+          <ul class="pagination ">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Precedant</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">suivant</a>
+            </li>
+          </ul>
+        </div>
+      </div> -->
+    </div>
+  </div>

@@ -1,0 +1,12 @@
+
+/* Réduction de la largeur des inputs */
+.form-control {
+max-width: 200px;
+}
+/* Positionnement de la photo en haut à droite de la carte principale */
+#photoPreview {
+position: absolute;
+top: 10px;
+right: 10px;
+}
+   

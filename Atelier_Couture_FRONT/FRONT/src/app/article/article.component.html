@@ -1,0 +1,24 @@
+<div class="container bs-primary opacity-5">
+   <div>
+    <app-form [formulaire]="formulaire" #forme
+      [dataCategorie]="dataCategorie"
+      [dataFournisseur]="dataFournisseur" 
+      [dataArticle]="dataArticle"
+      (dataSent)="receiveData($event)"
+      [message]="message"
+    ></app-form>
+    <app-liste [listerArticle]="listerArticle" 
+      [dataArticle]="dataArticle"
+     
+      (receiveDataEditer)="recevoirDataEditer($event,forme)"
+      (Articlesupprimer)="idAsupprimer($event)"
+    ></app-liste>
+   </div> 
+   <app-pagination 
+    [pagination]="pagination" 
+    [currentPage]="currentPage"
+     [itemsPerPage]="itemsPerPage"
+    ></app-pagination>
+  </div>
+
+  <!-- (pageChange)="handlePageChange($event)" -->

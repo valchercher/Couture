@@ -1,0 +1,41 @@
+
+
+<form action="" [formGroup]="itemArticle">
+    <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Article</th>
+              <th>Prix</th>
+              <th>Stock</th>
+              <th>Categorie</th>
+              <th>editer</th>
+              <th>supp</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor=" let item of dataArticle" paginate="{currentPage:page,itemsPerPage:tableSize,totalItels:total}">
+              <td>{{item?.libelle}}</td>
+              <td>{{item?.prix}}</td>
+              <td>{{item?.stock}}</td>
+              <td>{{item?.categorie}}</td>
+              <td ><input (click)="editer(item)" class="btn-primary" type="button" value="edit"></td>
+              <td >
+                    <ng-container *ngIf="!item.isConfirmerDelete; else countdownTemplate">
+                        <input class="btn-danger" type="button" (click)="supprimerArticle(item.id)" value="supp">
+                    </ng-container>
+                    <ng-template #countdownTemplate>
+                      <button class="btn-danger" [disabled] (click)="confirmerSuppression(item,item.id)"> OK({{count}})</button>
+                    </ng-template>
+              </td>
+          </tr>
+          </tbody>
+        </table>
+        <pagination-controls 
+        
+        previousLabel="precedent"
+        (pageChange)="onChangePage($event)"
+        nextLabel="suivant"
+    ></pagination-controls>
+      </div>
+</form>
