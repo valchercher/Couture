@@ -34,7 +34,7 @@ Route::get('fournisseur/rechercher/{fournisseur}',[FournisseurController::class,
 Route::post('article/ajouter',[ArticleController::class,'store']);
 Route::get('article/afficher',[ArticleController::class,'index']);
 // Route::get('article/{categorie}',[ArticleController::class,'countId']);
-Route::get('all',[ArticleController::class,'AlllArticleCategorieFournisseur']);
+Route::get('all',[ArticleController::class,'AllArticle']);
 Route::put('article/edit/{id}',[ArticleController::class,'editer']);
 Route::Delete('article/supprimer/{id}',[ArticleController::class,'supprimer']);
 Route::get('articlefournisseur/{idarticle}',[ArticleController::class,'articleFournisseur']);

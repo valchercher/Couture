@@ -8,25 +8,33 @@
                             <span ></span>
                         </div>
                         <label for="validationDefault01" class="form-label">Libelle</label>
-                        <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
-                            >
+                        <input id="libelle" (input)="onChangeCategorie()" formControlName="libelle" type="text" class="form-control " id="validationDefault01"  
+                         [ngClass]="{'is-invalid border-danger':formulaire.controls['libelle'].invalid &&(formulaire.controls['libelle'].touched ||formulaire.controls['libelle'].dirty),'border-success is-valid ':formulaire.controls['libelle'].valid &&(formulaire.controls['libelle'].touched ||formulaire.controls['libelle'].dirty)}"   >
+                         <div *ngIf="formulaire.controls['libelle'].errors?.['required']" class="text-danger">
+                            libelle doit etre saisie.
+                          </div>
+                          <div *ngIf="formulaire.controls['libelle'].errors?.['minlength']" class="text-danger">
+                            le libelle doit contenir minimun 4 caracteres.
+                          </div>
                     </div>
                     <div class="col-md-10">
                         <label for="validationDefault01" class="form-label">Prix</label>
                         <input formControlName="prix" type="number" class="form-control" id="validationDefault01" 
-                            
+                           [ngClass]="{'border-danger is-invalid':formulaire.controls['prix'].invalid && (formulaire.controls['prix'].touched || formulaire.controls['prix'].dirty), 'border-success is-valid':formulaire.controls['prix'].valid && (formulaire.controls['prix'].touched || formulaire.controls['prix'].dirty)}" 
                            >
                     </div>
                     <div class="col-md-10">
                         <label for="validationDefault01" class="form-label">Stock</label>
                         <input formControlName="stock" type="number" class="form-control" id="validationDefault01" 
-                    
+                        [ngClass]="{'border-danger is-invalid':formulaire.controls['stock'].invalid && (formulaire.controls['stock'].touched || formulaire.controls['stock'].dirty), 'border-success is-valid':formulaire.controls['stock'].valid && (formulaire.controls['stock'].touched || formulaire.controls['stock'].dirty)}" 
                           >
                     </div>
                     <div class="col-md-10">
                         <label for="validationDefault04" class="form-label">Categorie</label>
                         
-                            <select class="form-control"   id="validationDefault04" formControlName="categorie" >
+                            <select class="form-control"   id="validationDefault04" formControlName="categorie"
+                            [ngClass]="{'is-invalid border-danger':formulaire.controls['categorie'].invalid && (formulaire.controls['categorie'].touched || formulaire.controls['categorie'].dirty),'is-valid border-success':formulaire.controls['categorie'].valid && (formulaire.controls['categorie'].touched || formulaire.controls['categorie'].dirty)}"
+                            >
                                 <option value="">Selectionner categorie</option>
                                 <option *ngFor="let categ of ResponseCategorie">{{categ.libelle}}</option>
                             </select>

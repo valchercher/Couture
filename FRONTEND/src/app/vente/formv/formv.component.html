@@ -1,7 +1,6 @@
-<div class="card-body bg-secondary-bg">
-    <div class="">
-        <form  >
-            <div class="row">
+
+        <form   [formGroup]="formulaireVente">
+            <div class="row bg-white">
                 <div class="col">
                     <div class="row">
                         <div class="col-md-5">
@@ -11,8 +10,10 @@
                         </div>                     
                             <div class="col-md-7">
                                 <label for="validationDefault01" class="form-label">categorie</label>
-                                <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                                <select  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
                                     >
+                                    <option value=""></option>
+                                </select>
                             </div>
                     </div>
                     <div class="row mt-4">                    
@@ -28,47 +29,50 @@
                             </div> 
                     </div>
                     <!-- Article de confection  -->
-                    <div class="col-md-10">
-                        <label for="validationDefault01" class="form-label">Prix</label>
-                        <input formControlName="prix" type="number" class="form-control" id="validationDefault01" 
-                            
-                           >
-                    </div>
-                    <div class="col-md-10">
-                        <label for="validationDefault01" class="form-label">Stock</label>
-                        <input formControlName="stock" type="number" class="form-control" id="validationDefault01" 
-                    
-                          >
-                    </div>
-                    <div class="col-md-10">
-                        <label for="validationDefault04" class="form-label">Categorie</label>
-                        
-                            <select class="form-control"   id="validationDefault04" formControlName="categorie" >
-                                <option value="">Selectionner categorie</option>
-                                <option ></option>
-                            </select>
-                        
-                    </div>
-                    <div class="col-md-10 ml-3 --bs-light-border-subtle mt-2 border-dark">
-                        <div class="row" >
-                            <span class="bg-danger border-radius-50 text-white ml-2 fs-5"  >x</span>      
+                   <div class="col mt-5 border border-dark border-3 ">
+                       <div class="row justify-content-end border border-dark border-2  bg-primary">
+                        <div class="justify-content-center d-flex align-items-center  text-white" style="margin-right: 80px;">
+                            <h6>liste des articles de confection </h6>
                         </div>
-                    </div>
-                    <div class="col-md-10 mt-3">
-                        <div class="mt-2" for="">Fournisseur</div>
-                    <input type="text"  formControlName="fournisseur"  placeholder="Rechercher un fournisseur">
-                    </div>
-                     <div class="form-check" >
-                        <input class="form-check-input"  type="checkbox"   value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                         
-                        </label>
-                      </div> 
-                </div>
-                <div class="col border-dark ml-5" >
-                    <div class="image-upload-container col-md-6 ml-5 mt-4 ">
+                        <button>Add</button>
+                       </div>
+                       <div class="row">
+                        <div class="col-md-7">
+                            <label for="">Libelle</label>
+                        </div>
+                        <div>
+                            <label for="">Quantite</label>
+                        </div>
+                       </div>
+                     <!-- <div class="row form-group  ml-1 mb-1 ">
+                        <div class="row">
+                           <input type="text" class="form-control" placeholder="entre un article">
+                        </div>
+                        <div class="row ml-3">
+                            <input type="text" class="form-control" placeholder="entre une quantite">
+                         </div>
+                         <div class="form-row ml-3 mt-1">
+                            <i class="fas fa-trash text-danger"></i> 
+                         </div>
+
+                     </div> -->
+                     <div class="input-group mb-3 ">
+                        <input type="text" class="form-control" placeholder="entrer un article" aria-label="Username">
+                        <span class="input-group-text">@</span>
+                        <input type="text" class="form-control" placeholder="entrer une quantite" aria-label="Server">
+                        <button class="ml-1">
+                            <i class="fas fa-trash text-danger"></i> 
+                        </button>
+                        
+                      </div>
+                    
+                   </div>
+                    
+                </div> 
+                <div class="col border-dark ml-5 " style="margin-top: px;" >
+                    <div class="image-upload-container col-md-10 ml-5 mt-4 ">
                         <label for="photo" class="image-frame">
-                            <img [src]="" src="" alt=""   style="width: 200px;height: 200px;object-fit: cover; border-radius: 50%; border: 2px solid;" >                              
+                            <img [src]="" src="../assets/image/Capture d’écran du 2023-03-24 16-38-06.png" alt=""   style="width: 200px;height: 200px;object-fit: cover; border-radius: 50%; border: 2px solid;" >                              
                             <input type="file" id="photo" name="file" formControlName="photo"   style="display: none;">
                         </label>
                     </div>
@@ -79,13 +83,29 @@
                     </div>
                 </div>
             </div>
-            <div class="col d-flex mt-4 justify-content-center align-items-center">
-            <button   type="submit"  class="form-control col-2 btn "
+            <div class="col-md-11 d-flex mt-3 ml-1 justify-content-end align-items-center"  >
+            <button    type="submit"  class="col-2  btn btn-primary "
            
             >
                 Enregistrer
             </button>
             </div>
-        </form>   
-    </div>  
-</div>
+            <div class="row mt-4">                    
+                <div class=" col-md-4 ml-1">
+                    <label for="validationDefault01" class="form-label">Cout de Fabrication</label>
+                    <input  id="promo" formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                        >
+                </div>
+                <div class="col-md-3 ml-4">
+                    <label for="promo">Marge</label>
+                    <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                        >
+                </div> 
+                <div class="col-md-3 ml-5">
+                    <label for="promo">Prix de Vente</label>
+                    <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                        >
+                </div>
+        </div>
+        </form>
+        

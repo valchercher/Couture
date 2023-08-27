@@ -1,6 +1,7 @@
+
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { All, Article, Response } from 'src/app/interface/article';
+import { All, Article, Daum, Response, Root } from 'src/app/interface/article';
 import { Categorie } from 'src/app/interface/categorie';
 import { Fournisseur } from 'src/app/interface/fournisseur';
 
@@ -13,7 +14,7 @@ export class FormComponent implements OnInit{
   formulaire!:FormGroup;
  @Input('dataCategorie') ResponseCategorie:Categorie[]=[]
  @Input() ResponseFournisseur:Fournisseur[]=[]
- @Input('dataArticle') ResponseArticle:Article=[]
+ @Input('dataArticle') ResponseArticle:Daum[]=[]
  searchResults: Fournisseur[]=[];
   selectedFournisseurs: string[] = [];
   searchTerm: string = '';
@@ -30,10 +31,10 @@ constructor(private fb:FormBuilder){
   }
   validation(){
     this.formulaire=this.fb.group({
-      libelle:[null,[Validators.required,Validators.minLength(3),Validators.pattern('A-Z')]],
+      libelle:[null,[Validators.required,Validators.minLength(4),Validators.pattern('[A-Za-z0-9]*')]],
       prix:[null,[Validators.required,Validators.min(500)]],
       stock:[null,[Validators.required,Validators.min(5)]],
-      categorie:[null,],
+      categorie:[null,Validators.required],
       fournisseur:[[],[]],
       photo:[null,],
       reference:[null,]
@@ -96,12 +97,21 @@ constructor(private fb:FormBuilder){
     }
   }
   onChangeCategorie() {  
-    // const count:number|undefined=this.dataArticle?.filter(article=>article.categorie===this.formulaire.value.categorie).length;
+    console.log(this.ResponseArticle);
+    
+    //  const count:number|undefined=this.ResponseArticle.data.filter((article:Daum)=>article.categorie===this.formulaire.value.categorie).length;
+    // if(count!==undefined){
+    //   const nombre=count+1;  
+    //   const reference = "REF_"+this.formulaire.value.libelle.substring(0,3).toUpperCase()+"_"+`${this.formulaire.value.categorie.toUpperCase()}_`+nombre;  
+    //   this.formulaire.patchValue({reference:reference});
+    // }else{// const count:number|undefined=this.ResponseArticle.filter((article:Article)=>article.categorie===this.formulaire.value.categorie).length;
     // if(count!==undefined){
     //   const nombre=count+1;  
     //   const reference = "REF_"+this.formulaire.value.libelle.substring(0,3).toUpperCase()+"_"+`${this.formulaire.value.categorie.toUpperCase()}_`+nombre;  
     //   this.formulaire.patchValue({reference:reference});
     // }else{
+    //   console.log(' le nombre n\'est pas definit'); 
+    // }
     //   console.log(' le nombre n\'est pas definit'); 
     // }
   }

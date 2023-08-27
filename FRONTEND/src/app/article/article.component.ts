@@ -1,5 +1,5 @@
 
-import { All, Article, Response } from '../interface/article';
+import { All, Article, Daum, Response, Root } from '../interface/article';
 import { Categorie } from '../interface/categorie';
 import { Fournisseur } from '../interface/fournisseur';
 import { ArticleService } from '../service/article.service';
@@ -14,10 +14,11 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ArticleComponent implements OnInit {
   ReponseCategorie!:Categorie[] ;
   ReponseFournisseur:Fournisseur[]=[]
-  ResponseArticle:Article=[]
+  ResponseArticle:Daum[]=[]
 constructor(private apiService:ArticleService){}
 ngOnInit(): void {
-  this.getAll()
+  this.getAll();
+  this.articlePaginate()
 }
 getAll()
 {
@@ -32,9 +33,12 @@ getAll()
 }
 articlePaginate(){
   this.apiService.getarticlePaginate().subscribe({
-    next:(resp:Response<Article>)=>{
+    next:(resp:Response<Root>)=>{
       console.log(resp);
-      this.ResponseArticle=resp.data
+      console.log(resp.data);
+      
+      this.ResponseArticle=resp.data.data
+      console.log(this.ResponseArticle);
       
     }
   })

@@ -14,6 +14,8 @@ import { FormvComponent } from './vente/formv/formv.component';
 import { PaginationComponent } from './vente/pagination/pagination.component';
 import { ListervComponent } from './vente/listerv/listerv.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ItemvComponent } from './vente/listerv/itemv/itemv.component';
+
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     FormvComponent,
     PaginationComponent,
     ListervComponent,
-    NavbarComponent
+    NavbarComponent,
+   ItemvComponent
   ],
   imports: [
     BrowserModule,

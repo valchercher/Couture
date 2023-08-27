@@ -21,6 +21,7 @@ class ArticleController extends Controller
         $categorie=Categorie::all();
         $fournisseur=Fournisseur::all();
         return response()->json([
+            "message"=>"",
           "data"=>[
             "categorie"=> $categorie,
             "fournisseur"=>$fournisseur
@@ -31,7 +32,12 @@ class ArticleController extends Controller
     public function AllArticle(){
         $articles = Article::with('fournisseurs', 'categorie')->paginate(3);
 
-        return new ArticleCollection($articles);
+        return response()->json([
+            "message"=>"",
+            "data"=>[
+                $articles
+            ]
+        ]);
     }
 
     public function createArticle(ArticleRequest $request)
