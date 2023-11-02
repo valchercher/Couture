@@ -1,14 +1,43 @@
 <div class=" mt-4">
-    <table class="col-md-11 table table-bordered table-striped" style="margin-left: -10px;">
+    <div class="col-md-3"> 
+        <label for="">Filtrer les AVs par libelle</label>   
+            <input type="text"  class="form-control" (input)="searchLibelleArtVente($event)" [(ngModel)]="search">
+    </div>
+    <table class="col-md-11 mt-2 table table-bordered table-striped" style="margin-left: 0px;">
         <thead>
             <th >Libelle</th>
-            <th>Quantite stock</th>
+            <th>Quantite stock ::
+                <i class="fa fa-arrow-up ml-5" [ngStyle]="{'color':couleurASC}" (click)="ascendante()"></i>
+                <i class="fa fa-arrow-down ml-2 "[ngStyle]="{'color':couleurDESC}" (click)="descendante()"></i>
+            </th>
             <th>Articles de confections</th>
+            <th>editer</th>
+            <th>supprimer</th>
         </thead>
         <tbody>
-            <tr id="app-itemv">
+            <tr id="app-itemv" 
+            (dataUpdate)="UpdateVente($event)"
+            [dataPginate]="ResponsePaginate"
+            (dataDelete)="DeleteVente($event)"
+            [dataItem]="vente"
+            [dataConf]="vente.confections" 
+            *ngFor="let vente of ResponsePaginate?.data?.articleVente! | orderBy :ordre | pipeFilter :search :'libelle'"
+            >
                
             </tr>
         </tbody>
     </table>
+    <!-- <pagination-controls
+        previousLabel="precedent"
+        nextLabel="suivant"
+        (pageChange)="onChangePage($event)"
+    ></pagination-controls> -->
+    <mat-paginator 
+        [length]="20"
+        [pageIndex]="pageIndex"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[3,5, 10, 25, 100]"
+        (page)="getServerData($event)">
+    </mat-paginator>
+
 </div> 

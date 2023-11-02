@@ -21,7 +21,6 @@ return new class extends Migration
             $table->float('marge');
             $table->float('prixVente');
             $table->string('reference');
-            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

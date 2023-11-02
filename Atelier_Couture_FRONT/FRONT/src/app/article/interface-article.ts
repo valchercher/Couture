@@ -6,7 +6,7 @@ export interface All {
   }
   
   export interface Categorie {
-    id: number
+    id: number|string
     libelle: string
   }
   
@@ -23,7 +23,8 @@ export interface All {
     stock: number
     Reference?: string
     categorie?: Categorie
-    fournisseur?:string
+    Fournisseur?:Fournisseur[]
+    fournisseur?:string|number[]
     photo?:string|undefined
     isConfirmerDelete?: boolean;
     count: number;
@@ -37,6 +38,7 @@ export interface All {
   export interface Response<T>{
     data:T
     message?:string
+    status?:number
   }
   export interface supprimer{
     status:number

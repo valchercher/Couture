@@ -3,8 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Response, categorie, categorieId } from '../interface/categorie';
+import { Categorie } from '../interface/categorie';
 import { environement } from 'src/environments/environment.development';
+import { Response } from '../interface/article';
 
 
 @Injectable({
@@ -14,8 +15,8 @@ export class ApiCategorieService {
   constructor(private _http:HttpClient) { 
 
   }
-  getdata(page:number):Observable<Response<categorie>>{
-    return this._http.get<Response<categorie>>(environement.urlart+`categorie/afficher?page=${page}`)
+  getdata(page:number):Observable<Response<Categorie>>{
+    return this._http.get<Response<Categorie>>(environement.urlart+`categorie/afficher?page=${page}`)
   }
   postData(data:any) {
     const httpOptions = {

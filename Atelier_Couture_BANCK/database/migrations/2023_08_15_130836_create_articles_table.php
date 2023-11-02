@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('libelle')->unique();
             $table->float('prix');
             $table->float('stock');
-            $table->string('photo')->nullable();
             $table->string('Reference')->unique();
             $table->foreignIdFor(Categorie::class)->constrained()->cascadeOnDelete();
             $table->timestamps();

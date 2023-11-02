@@ -1,11 +1,21 @@
 <div class="card-body --bs-secondary-bg container border border-2">
-    <div class="d-flex justify-content-center aligns-item-center shadow p-3 mb-5 bg-body-tertiary rounded bg-secondary-bg-rgb">
+    <!-- <div class="d-flex justify-content-center aligns-item-center shadow p-3 mb-5 bg-body-tertiary rounded bg-secondary-bg-rgb">
         <h1>ajouter un article de Vente</h1>
-    </div>
+    </div> -->
+    <div>{{today|date:'medium':'UTC'}}</div>
     <hr>
     <div class="ml-5">
-        <app-formv></app-formv>
-        <app-listerv></app-listerv>
+        <app-formv #formv [dataCategorie]="Response" (dataStore)="storeForm($event)">
+
+        </app-formv>
+        <app-listerv [dataVente]="Response"
+            [dataPginate]="ResponsePaginate"
+            (dataUpdate)="updateArticleVente($event)"
+            (dataDelete)="deleteVente($event)"
+            (numberPage)="numberPage($event)"
+            (searchLibelle)="searchLibelle($event)"
+            #paginator
+        ></app-listerv>
     </div>
 </div>
 <!-- <app-pagination></app-pagination> -->

@@ -31,7 +31,7 @@ Route::post('categorie/supprimer',[CategorieController::class,'supprimer']);
 Route::post('fournisseur/ajouter',[FournisseurController::class,'ajouterFournisseur']);
 Route::get('fournisseur/rechercher/{fournisseur}',[FournisseurController::class,'searchFournisseur']);
 // Article
-Route::post('article/ajouter',[ArticleController::class,'store']);
+Route::post('article/ajouter',[ArticleController::class,'createArticle']);
 Route::get('article/afficher',[ArticleController::class,'index']);
 // Route::get('article/{categorie}',[ArticleController::class,'countId']);
 Route::get('all',[ArticleController::class,'AllArticle']);
@@ -48,7 +48,24 @@ Route::get('article/categ/four',[ArticleController::class,'all']);
 Route::get('article/allArticle',[ArticleController::class,'AllArticle']);
 // ===========================article de confection ==========================================
 Route::post('articleVente',[ArticleVenteController::class,'store']);
-Route::put('articleVente/edit/{id}',[ArticleVenteController::class,'edit']);
-Route::delete('articleVente/supp/{id}',[ArticleVenteController::class,'supprimer']);
-Route::get('articleVente/all',[ArticleVenteController::class,'index']);
+// Route::put('articleVente/edit/{id}',[ArticleVenteController::class,'edit']);
+// Route::delete('articleVente/supp/{id}',[ArticleVenteController::class,'supprimer']);
+Route::get('articleVente/all',[ArticleVenteController::class,'All']);
+// Route::get('articleVente/paginate',[ArticleVenteController::class,'index']);
 Route::get('articleVente/search/{libelle}',[ArticleVenteController::class,'recherche']);
+
+Route::controller(ArticleVenteController::class)->prefix('articleVente')->group(function(){
+    Route::get('paginate/{index?}','index');
+    Route::put('/update/{id}','edit');
+    Route::post('/supprimer/{id}','supprimer');
+});
+
+
+
+
+
+
+
+Route::controller(ArticleController::class)->prefix('ventes')->group(function(){
+    Route::get('article','all');
+});

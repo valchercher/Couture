@@ -40,4 +40,10 @@ class Article extends Model
     {
         return $builder->where('id',$id);
     }
+    public function scopeConfectionCategorie($query)
+    {
+        return $query->whereHas('categorie', function ($query) {
+            $query->where('type', 'confection');
+        });
+    }
 }

@@ -14,7 +14,7 @@ export class FormComponent implements OnInit{
   formulaire!:FormGroup;
  @Input('dataCategorie') ResponseCategorie:Categorie[]=[]
  @Input() ResponseFournisseur:Fournisseur[]=[]
- @Input('dataArticle') ResponseArticle:Daum[]=[]
+ @Input('dataArticle') ResponseArticle!:Article[]
  searchResults: Fournisseur[]=[];
   selectedFournisseurs: string[] = [];
   searchTerm: string = '';
@@ -98,21 +98,26 @@ constructor(private fb:FormBuilder){
   }
   onChangeCategorie() {  
     console.log(this.ResponseArticle);
+    console.log(this.formulaire.value.categorie);
+    console.log(this.ResponseArticle);
+ 
+    const count: number | undefined = this.ResponseArticle.filter((article: Article) => {
+      return article.categorie.libelle === this.formulaire.value.categorie;
+    }).length;
     
-    //  const count:number|undefined=this.ResponseArticle.data.filter((article:Daum)=>article.categorie===this.formulaire.value.categorie).length;
-    // if(count!==undefined){
-    //   const nombre=count+1;  
-    //   const reference = "REF_"+this.formulaire.value.libelle.substring(0,3).toUpperCase()+"_"+`${this.formulaire.value.categorie.toUpperCase()}_`+nombre;  
-    //   this.formulaire.patchValue({reference:reference});
-    // }else{// const count:number|undefined=this.ResponseArticle.filter((article:Article)=>article.categorie===this.formulaire.value.categorie).length;
-    // if(count!==undefined){
-    //   const nombre=count+1;  
-    //   const reference = "REF_"+this.formulaire.value.libelle.substring(0,3).toUpperCase()+"_"+`${this.formulaire.value.categorie.toUpperCase()}_`+nombre;  
-    //   this.formulaire.patchValue({reference:reference});
-    // }else{
-    //   console.log(' le nombre n\'est pas definit'); 
-    // }
-    //   console.log(' le nombre n\'est pas definit'); 
-    // }
+    if(count!==undefined){
+      const nombre=count+1;  
+      const reference = "REF_"+this.formulaire.value.libelle.substring(0,3).toUpperCase()+"_"+`${this.formulaire.value.categorie.toUpperCase()}_`+nombre;  
+      this.formulaire.patchValue({reference:reference});
+    }else{// const count:number|undefined=this.ResponseArticle.filter((article:Article)=>article.categorie===this.formulaire.value.categorie).length;
+    if(count!==undefined){
+      const nombre=count+1;  
+      const reference = "REF_"+this.formulaire.value.libelle.substring(0,3).toUpperCase()+"_"+`${this.formulaire.value.categorie.toUpperCase()}_`+nombre;  
+      this.formulaire.patchValue({reference:reference});
+    }else{
+      console.log(' le nombre n\'est pas definit'); 
+    }
+      console.log(' le nombre n\'est pas definit'); 
+    }
   }
 }

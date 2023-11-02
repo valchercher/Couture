@@ -5,12 +5,12 @@
     <div class="card-body bg-secondary-bg">
         <div class="">
             <form  [formGroup]="formulaire" (ngSubmit)="onSubmit()">
+                <div class="bg-success  justify-content-center align-items-center"   style="display: flex;justify-content: center;text-align: center;font-size: 22px; background-color: rgba(71, 235, 0, 0.4); width: 900px;height:auto;">
+                    <span>{{message}}</span>
+                </div>
                 <div class="row">
                     <div class="col">
                         <div class="col-md-10">
-                            <div class="bg-success text-white">
-                                <span >{{message}}</span>
-                            </div>
                             <label for="validationDefault01" class="form-label">Libelle</label>
                             <input (input)="onChangeCategorie()" formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
                                 [ngClass]="{'border-danger is-invalid': formulaire.controls['libelle'].invalid && (formulaire.controls['libelle'].touched ||formulaire.controls['libelle'].dirty), 'border-success is-valid': formulaire.controls['libelle'].valid && (formulaire.controls['libelle'].touched ||formulaire.controls['libelle'].dirty)}"
@@ -42,13 +42,17 @@
                         <div class="col-md-10">
                             <label for="validationDefault04" class="form-label">Categorie</label>
                             
-                                <select class="form-control" (click)="onChangeCategorie()"  id="validationDefault04" formControlName="categorie" >
+                                <select class="form-control" (click)="onChangeCategorie($event)"  id="validationDefault04" formControlName="categorie"  
+                                [ngClass]="{'border-danger is-invalid': formulaire.controls['categorie'].invalid && (formulaire.controls['categorie'].touched ||formulaire.controls['categorie'].dirty), 'border-success is-valid': formulaire.controls['categorie'].valid && (formulaire.controls['categorie'].touched ||formulaire.controls['categorie'].dirty)}">
                                     <option value="">Selectionner categorie</option>
-                                    <option selected  *ngFor="let item of dataCategorie" [value]="item?.libelle" >{{item?.libelle}}</option>
+                                    <option selected  *ngFor="let item of dataCategorie" [ngValue]="item?.libelle" >
+                                        <input type="hidden"  value="{{item.id}}">
+                                        {{item?.libelle}}</option>
+                                    
                                 </select>
                             
                         </div>
-                        <div class="col-md-10 mt-3">
+                        <!-- <div class="col-md-10 mt-3">
                             <div class="mt-2" for="">Fournisseur</div>
                         <input type="text" formControlName="rechercher" (input)="searchFournisseurs()" placeholder="Rechercher un fournisseur">
                         <ul *ngIf="searchResults ">
@@ -58,7 +62,27 @@
                         </ul>
                             
                             <input type="text"  (click)="vider()"  [value]="updateSearchTerm()" class="form-control mt-2" name="fournisseur" formControlName="fournisseur" readonly>
-                        </div> 
+                        </div>  -->
+                        <div class="col-md-10 ml-3 --bs-light-border-subtle mt-2 border-dark">
+                            <div class="row" *ngFor="let four of selectedFournisseurs">
+                                {{ four.libelle     
+                                  }}
+                                <div class="  text-white ml-2 fs-5" (click)="vider(four)" >
+                                    <i class="far fa-times-circle bg-danger" ></i>
+                                </div>      
+                            </div>
+                        </div>
+                        <div class="col-md-10 mt-3">
+                            <div class="mt-2" for="">Fournisseur</div>
+                        <input type="text" (input)="searchFournisseurs()" formControlName="fournisseur"  placeholder="Rechercher un fournisseur">
+                        </div>
+                         <div class="form-check" *ngFor="let fournisseur of searchResults ">
+                            <input class="form-check-input"  [checked]="selection" type="checkbox" (click)="addSelectedFournisseur(fournisseur,fournisseur.id)"  value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              {{fournisseur.libelle}}
+                            </label>
+                           
+                          </div>
                     </div>
                     <div class="col border-dark ml-5" >
                         <div class="image-upload-container col-md-6 ml-5 mt-4 ">

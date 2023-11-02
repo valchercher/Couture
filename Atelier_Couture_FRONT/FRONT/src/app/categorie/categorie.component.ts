@@ -4,7 +4,6 @@ import { ApiCategorieService } from './api-categorie.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ThisReceiver } from '@angular/compiler';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
-import { categorie } from '../interface/categorie';
 import { CategEnum } from '../categ-enum';
 
 @Component({

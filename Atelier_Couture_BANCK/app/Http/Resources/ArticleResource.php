@@ -5,6 +5,7 @@ use App\Models\Article;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategorieResource;
+use App\Http\Resources\FournisseurResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ArticleResource extends JsonResource
@@ -19,14 +20,17 @@ class ArticleResource extends JsonResource
         //  return parent::toArray($request);
        
          return [
-            'data' => $this->collection,
-            'pagination' => [
-                'current_page' => $this->currentPage(),
-                'last_page' => $this->lastPage(),
-                'prev_page_url' => $this->previousPageUrl(),
-                'next_page_url' => $this->nextPageUrl(),
-                'total' => $this->total(),
-            ],
+           
+                'id'=>$this->id,
+                'libelle'=>$this->libelle,
+                'prix'=>$this->prix,
+                'stock'=>$this->stock,
+                "reference"=>$this->Reference,
+                "photo"=>$this->photo,
+                "Fournisseur"=>FournisseurResource::collection($this->fournisseurs),
+                "categorie"=>new FournisseurResource($this->categorie),
+            
+            
         ];
     }
 }

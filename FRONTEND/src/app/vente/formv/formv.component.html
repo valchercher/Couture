@@ -1,79 +1,73 @@
 
-        <form   [formGroup]="formulaireVente">
+        <form   [formGroup]="formulaireVente" (ngSubmit)="onSubmit()">
+            <div class="bg-success bg-gradient   d-flex text-white justify-content-center align-items-center h-25" style="font-size: 21px; align-self: start;object-fit: cover">
+               <div class="h-25">
+                <div type="text"  class="h-50" value="">{{message}}</div>
+               </div>
+            </div>
             <div class="row bg-white">
                 <div class="col">
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-md-5">
                             <label for="validationDefault01" class="form-label">Libelle</label>
-                            <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
-                                >
+                            <input  formControlName="libelle" title="ajouter un libelle" type="text" class="form-control " id="validationDefault01" 
+                               [ngClass]="{'is-invalid border-danger':formulaireVente.controls['libelle'].invalid && (formulaireVente.controls['libelle'].touched ||formulaireVente.controls['libelle'].dirty),
+                               'is-valid border-success':formulaireVente.controls['libelle'].valid && (formulaireVente.controls['libelle'].touched ||formulaireVente.controls['libelle'].dirty)
+                            }"
+                            (input)="onChangeReference()"
+                             >
+                             <div *ngIf="formulaireVente.controls['libelle']?.hasError('requred')" class="text-danger">le libelle est obligatoire
+                            </div> 
+                            <div *ngIf="formulaireVente.controls['libelle']?.hasError('minlength')" class="text-danger">le libelle doit contenir au moins 3 caracteres
+                            </div> 
+                            <div *ngIf="formulaireVente.controls['libelle']?.hasError('pattern')" class="text-danger">le libelle doit contenir que des lettres
+                            </div> 
                         </div>                     
-                            <div class="col-md-7">
-                                <label for="validationDefault01" class="form-label">categorie</label>
-                                <select  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
-                                    >
-                                    <option value=""></option>
-                                </select>
+                        <div class="col-md-3">
+                            <mat-form-field>
+                                <mat-label>Categorie</mat-label>
+                                <mat-select title="selectionner une categorie" formControlName="categorie_id" type="text" class="form-control " id="validationDefault01" 
+                                (ngModelChange)="onChangeReference()"
+                                [compareWith]="compareCategorie"
+                               [ngClass]="{'is-invalid border-danger':formulaireVente.controls['categorie_id'].invalid && (formulaireVente.controls['categorie_id'].touched ||formulaireVente.controls['categorie_id'].dirty),
+                               'is-valid border-success':formulaireVente.controls['categorie_id'].valid && (formulaireVente.controls['categorie_id'].touched ||formulaireVente.controls['categorie_id'].dirty)}"
+                              >
+                                    <mat-option>choice categorie</mat-option> 
+                                  <mat-option *ngFor="let categorie of Response?.data?.categorie"  [value]="categorie">{{categorie.libelle}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </div>
+                            <div class="col-md-7 mt-3">
+                                <label for="">quantite stock</label>
+                               <input title="donner la quantite stock" type="number" class="form-control" name="" formControlName="quantitestock" id="">
                             </div>
                     </div>
                     <div class="row mt-4">                    
                             <div class="ml-5">
-                                <label for="validationDefault01" class="form-label">Promo</label>
-                                <input  id="promo" formControlName="libelle" type="checkbox" class="form-control " id="validationDefault01" 
+                                <label for="validationDefault01"  class="form-label">Promo</label>
+                                <input  id="promo" formControlName="promo" title="clicke pour faire la promotion"  (click)="isPromo()" type="checkbox" class="form-control " id="validationDefault01" 
                                     >
+                                    
                             </div>
-                            <div class="col-md-5 ml-5">
+                            <div class="col-md-5 ml-5 " #VaeurPromo [class.d-none]="cacherElement">
                                 <label for="promo">Valeur</label>
-                                <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                                <input  formControlName="valeurPromo" type="number" class="form-control " id="validationDefault01" 
                                     >
-                            </div> 
+                                   
+                                    <div *ngIf="formulaireVente.get('valeurPromo')?.hasError('min') || formulaireVente.get('valeurPromo')?.hasError('max')" class="text-danger">
+                                        la valeur doit compris entre 0 et 100
+                                     </div> 
+                            </div>
                     </div>
-                    <!-- Article de confection  -->
-                   <div class="col mt-5 border border-dark border-3 ">
-                       <div class="row justify-content-end border border-dark border-2  bg-primary">
-                        <div class="justify-content-center d-flex align-items-center  text-white" style="margin-right: 80px;">
-                            <h6>liste des articles de confection </h6>
-                        </div>
-                        <button>Add</button>
-                       </div>
-                       <div class="row">
-                        <div class="col-md-7">
-                            <label for="">Libelle</label>
-                        </div>
-                        <div>
-                            <label for="">Quantite</label>
-                        </div>
-                       </div>
-                     <!-- <div class="row form-group  ml-1 mb-1 ">
-                        <div class="row">
-                           <input type="text" class="form-control" placeholder="entre un article">
-                        </div>
-                        <div class="row ml-3">
-                            <input type="text" class="form-control" placeholder="entre une quantite">
-                         </div>
-                         <div class="form-row ml-3 mt-1">
-                            <i class="fas fa-trash text-danger"></i> 
-                         </div>
-
-                     </div> -->
-                     <div class="input-group mb-3 ">
-                        <input type="text" class="form-control" placeholder="entrer un article" aria-label="Username">
-                        <span class="input-group-text">@</span>
-                        <input type="text" class="form-control" placeholder="entrer une quantite" aria-label="Server">
-                        <button class="ml-1">
-                            <i class="fas fa-trash text-danger"></i> 
-                        </button>
-                        
-                      </div>
                     
-                   </div>
+                    <!-- Article de confection  -->
                     
                 </div> 
                 <div class="col border-dark ml-5 " style="margin-top: px;" >
                     <div class="image-upload-container col-md-10 ml-5 mt-4 ">
-                        <label for="photo" class="image-frame">
-                            <img [src]="" src="../assets/image/Capture d’écran du 2023-03-24 16-38-06.png" alt=""   style="width: 200px;height: 200px;object-fit: cover; border-radius: 50%; border: 2px solid;" >                              
-                            <input type="file" id="photo" name="file" formControlName="photo"   style="display: none;">
+                        <label for="img" class="image-frame">
+                            <img [src]="photos"   alt=""   style="width: 200px;height: 200px;object-fit: cover; border-radius: 50%; border: 2px solid;" >                              
+                            <input type="file" id="img" formControlName="photo"  (change)="onChangeImage($event)"  style="display: none;">
                         </label>
                     </div>
                     
@@ -81,31 +75,103 @@
                         <label for="validationDefault01" class="form-label ml-5">Reference</label>
                         <input formControlName="reference"   type="text" class="form-control" id="validationDefault01" readonly>
                     </div>
+                    <div class="col-md-11 d-flex mt-3 ml-1 justify-content-center align-items-center"  >
+                        <button    type="submit"  class="col-5  btn "
+                       
+                        [ngClass]="{'btn-success':isEditer , 'btn-primary':isEditer}"
+                        [disabled]="diff.length>0 || formulaireVente.invalid"
+                       mat-raised-button color="primary" >
+                           {{isEditer?'Modifier':'Enregistrer'}}
+                        </button>
+                        </div>
                 </div>
             </div>
-            <div class="col-md-11 d-flex mt-3 ml-1 justify-content-end align-items-center"  >
-            <button    type="submit"  class="col-2  btn btn-primary "
-           
-            >
-                Enregistrer
-            </button>
-            </div>
-            <div class="row mt-4">                    
+            <!-- <div class="d-flex justify-content-around"> -->
+                
+                <div>
+                    <button  type="button" class="btn btn border border-2 " title="ajouter un article" [disabled]="confections.invalid" (click)="addItem()" mat-raised-button color="primary" >Add</button>
+                </div>
+            <table class="table" >
+                <thead>
+                  <tr>
+                    <th>Libellé</th>
+                    <th>Quantité</th>       
+                  </tr>
+                </thead>
+                <tbody formArrayName="confections" *ngFor="let item of confections.controls; let i = index;" class="">
+                   <tr [formGroupName]="i" >
+                    <!-- <td > <span [matBadge]="i" matBadgeOverlap="false" ></span></td> -->
+                    <td>
+                        <input formControlName="libelle" title="chercher un article de confection" class="form-control"  placeholder="entrer un article"
+                        (input)="selecteLibelle(i,$event)"
+                        [ngClass]="{'is-invalid border-danger':item.get('libelle')?.invalid && (item.get('libelle')?.touched ||item.get('libelle')?.dirty),
+                                        'is-valid border-success':item.get('libelle')?.valid && (item.get('libelle')?.touched ||item.get('libelle')?.dirty)
+                                        }"
+                        >
+                        <div class="text-danger" *ngIf="item.get('libelle')?.hasError('minlength')">libelle doit contenir au moins 3 caractères</div>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" formControlName="quantite" placeholder="entrer une quantite" aria-label="quantite" 
+                        (input)="addCount(i,$event)" [readOnly]="item.get('libelle')?.invalid!"
+                        [ngClass]="{'is-invalid border-danger':item.get('quantite')?.invalid && (item.get('quantite')?.touched ||item.get('quantite')?.dirty),
+                        'is-valid border-success':item.get('quantite')?.valid && (item.get('quantite')?.touched ||item.get('quantite')?.dirty)
+                        }">
+                        <div class="text-danger" *ngIf="item.get('quantite')?.hasError('min')">La quantite doit contenir minimum 5</div>
+                    </td>
+                    <td>
+                        <button  type="button"title="Supprimer la ligne" *ngIf="confections.controls.length > 1"  (click)="deleteItemLine(i)">
+                            <i class="fas fa-trash text-danger"></i></button>
+                    </td>
+                   </tr>
+                   <div *ngIf="item.get('categorie')?.hasError('invalidCategorie')">
+                    <pre>{{ item.get('categorie')?.getError('error') }}</pre>
+                  </div>                
+                   <tr *ngIf="i==activeRowIndex">
+                    <td colspan="">
+                      <div class="col mt-1" *ngIf="searchArticle">
+                        <div *ngFor="let art of searchArticle" >
+                          <span class="border border-2" (click)="selectArticle(art, i)" [ngStyle]="{'cursor':'pointer'}" style="font-size: 15px;">{{art.libelle}}</span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr> 
+                  <!-- <pre>
+                    {{confections.value|json}}
+                    {{confections.valid}}
+                    {{confections.errors|json}}
+                    </pre> -->
+                </tbody>
+            </table>           
+            <div  class="fs-22 text-danger">{{messageCategorie}}</div>
+            <div class="row m mt-2">                    
                 <div class=" col-md-4 ml-1">
                     <label for="validationDefault01" class="form-label">Cout de Fabrication</label>
-                    <input  id="promo" formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
+                    <input  id="" formControlName="coutFabrication" type="number" class="form-control" id="validationDefault01" 
+                        [ngClass]="{'is-invalid':formulaireVente.controls['coutFabrication'].invalid &&(formulaireVente.controls['coutFabrication'].touched ||formulaireVente.controls['coutFabrication'].dirty),
+                        'is-valid':formulaireVente.controls['coutFabrication'].valid &&(formulaireVente.controls['coutFabrication'].touched ||formulaireVente.controls['coutFabrication'].dirty)}"  
+                    readonly
                         >
                 </div>
                 <div class="col-md-3 ml-4">
-                    <label for="promo">Marge</label>
-                    <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
-                        >
+                    <label for="marge">Marge</label>
+                    <input (change)="addMarge" formControlName="marge" title="ajouter une marge" type="number" class="form-control " id="validationDefault01" 
+                    (input)="addMarge()"
+                        [ngClass]="{'is-invalid':formulaireVente.controls['marge'].invalid &&(formulaireVente.controls['marge'].touched ||formulaireVente.controls['marge'].dirty),
+                        'is-valid':formulaireVente.controls['marge'].valid &&(formulaireVente.controls['marge'].touched ||formulaireVente.controls['marge'].dirty)}"  
+
+                    >
+                    <div *ngIf="formulaireVente.controls['marge'].hasError('horsMarge')" class="text-danger">
+                      La  Marge doit compris entre 5000 et le tiers du cout de fabrication .
+                    </div>
                 </div> 
                 <div class="col-md-3 ml-5">
-                    <label for="promo">Prix de Vente</label>
-                    <input  formControlName="libelle" type="text" class="form-control " id="validationDefault01" 
-                        >
+                    <label for="prix">Prix de Vente</label>
+                    <input  formControlName="prixVente" type="number" class="form-control " id="validationDefault01" 
+                       readonly >
                 </div>
+                <!-- <p> {{getTotalPrice()}}</p>
+
+                <pre>{{formulaireVente.value.confections | json }}</pre> -->
         </div>
         </form>
         

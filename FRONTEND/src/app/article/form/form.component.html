@@ -8,7 +8,7 @@
                             <span ></span>
                         </div>
                         <label for="validationDefault01" class="form-label">Libelle</label>
-                        <input id="libelle" (input)="onChangeCategorie()" formControlName="libelle" type="text" class="form-control " id="validationDefault01"  
+                        <input id="libelle"  formControlName="libelle" type="text" class="form-control " id="validationDefault01"  
                          [ngClass]="{'is-invalid border-danger':formulaire.controls['libelle'].invalid &&(formulaire.controls['libelle'].touched ||formulaire.controls['libelle'].dirty),'border-success is-valid ':formulaire.controls['libelle'].valid &&(formulaire.controls['libelle'].touched ||formulaire.controls['libelle'].dirty)}"   >
                          <div *ngIf="formulaire.controls['libelle'].errors?.['required']" class="text-danger">
                             libelle doit etre saisie.
@@ -32,11 +32,11 @@
                     <div class="col-md-10">
                         <label for="validationDefault04" class="form-label">Categorie</label>
                         
-                            <select class="form-control"   id="validationDefault04" formControlName="categorie"
+                            <select class="form-control" (click)="onChangeCategorie()"  id="validationDefault04" formControlName="categorie"
                             [ngClass]="{'is-invalid border-danger':formulaire.controls['categorie'].invalid && (formulaire.controls['categorie'].touched || formulaire.controls['categorie'].dirty),'is-valid border-success':formulaire.controls['categorie'].valid && (formulaire.controls['categorie'].touched || formulaire.controls['categorie'].dirty)}"
                             >
                                 <option value="">Selectionner categorie</option>
-                                <option *ngFor="let categ of ResponseCategorie">{{categ.libelle}}</option>
+                                <option *ngFor="let categ of ResponseCategorie" value="{{categ.libelle}}">{{categ.libelle}}</option>
                             </select>
                         
                     </div>

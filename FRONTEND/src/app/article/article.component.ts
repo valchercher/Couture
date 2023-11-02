@@ -14,7 +14,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ArticleComponent implements OnInit {
   ReponseCategorie!:Categorie[] ;
   ReponseFournisseur:Fournisseur[]=[]
-  ResponseArticle:Daum[]=[]
+  ResponseArticle!:Article[]
 constructor(private apiService:ArticleService){}
 ngOnInit(): void {
   this.getAll();
@@ -35,9 +35,9 @@ articlePaginate(){
   this.apiService.getarticlePaginate().subscribe({
     next:(resp:Response<Root>)=>{
       console.log(resp);
-      console.log(resp.data);
+      console.log(resp);
       
-      this.ResponseArticle=resp.data.data
+      this.ResponseArticle=resp.data.article
       console.log(this.ResponseArticle);
       
     }

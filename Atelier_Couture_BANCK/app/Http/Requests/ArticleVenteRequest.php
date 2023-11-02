@@ -25,10 +25,11 @@ class ArticleVenteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "libelle"=>"sometimes|required|unique:article_ventes,libelle|min:3",
-            "categorie"=>"required|exists:categories,id",
+            "libelle"=>"required|unique:article_ventes,libelle|min:3",
+            "categorie_id"=>"required|exists:categories,id",
             "marge"=>"required|numeric|min:5000",
-            "article"=>"required|array|exists:articles,id",
+            "confections"=>"required|array|",
+            "photo"=>"required"
         ];
     }
     public function  failedValidation(Validator $validator)

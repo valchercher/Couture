@@ -28,8 +28,8 @@ class ArticleRequest extends FormRequest
             "prix"=>"required|numeric|min:0",
             "stock"=>"required|numeric|min:0",
             "categorie"=>"required|exists:categories,id",
-            "fournisseurs" => "required|array",
-            "fournisseurs.*" => "exists:fournisseurs,id",          
+            "fournisseur" => "required|array",
+            "fournisseur.*" => "exists:fournisseurs,id",          
         ];
     }
     public function validatorFonction(Validator $validator)
@@ -53,6 +53,7 @@ class ArticleRequest extends FormRequest
         "categorie.required"=>"categorie doit être fourni",
         "categorie.exists"=>"le categorie n'existe pas ",
         "fournisseurs.required"=>"fournisseur doit être fourni",
+        "fournisseurs.array"=>"fournisseur est un tableau",
         "fournisseurs.exists"=>"le fournisseur n'existe pas ",
         "photo.required"=>"image doit être requi",
         "photo.mimes"=>"image doit avoir que ces extension jpeg,jpg,png",

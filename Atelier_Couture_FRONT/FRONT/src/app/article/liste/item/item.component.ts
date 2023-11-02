@@ -12,23 +12,30 @@ import { Article } from '../../interface-article';
 export class ItemComponent implements OnInit {
   @Input() itemArticle!:FormGroup
   @Input() dataArticle?:Article[];
-  @Input() page?:number;
-  @Input() itemsPerPage?:number|undefined;
+  // @Input() page?:number;
+  // @Input() itemsPerPage?:number|undefined;
   @Output() editerData=new EventEmitter<Article>();
   @Output() supprimer =new EventEmitter<number>();
-  @Input() currentPage?:number; 
-  @Input() totalItems?:number; 
+  // @Input() currentPage?:number; 
+  // @Input() totalItems?:number; 
   isConfirmationVisible: boolean = false;
   count: number = 3;
+  page:number = 1;
+  tableSize:number = 3;
+  total = 10; 
   countInterval: ReturnType<typeof setInterval>|undefined; 
   constructor(private formBuilder:FormBuilder){
   }
   ngOnInit(): void {
     this.itemArticle = this.formBuilder.group({});
   }
-  onChangePage(pageNumber: number) {
-    this.currentPage = pageNumber; 
+  // onChangePage(pageNumber: number) {
+  //   this.currentPage = pageNumber; 
+  // }
+  onChangePage(event:number){
+    this.page=event;
   }
+  
   editer(item:Article)
   {
     console.log(item);

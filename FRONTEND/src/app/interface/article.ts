@@ -8,26 +8,47 @@ export interface Article {
     stock: number
     photo: string
     Reference: string
-    categorie: Categorie[]
+    categorie: Categorie
     fournisseurs: Fournisseur[]
 }
 
 export interface Response<T>{
+    status:number
     message:string
     data:T
+}
+export interface Resultat<T>{
+  data:T[]
+}
+export interface Vente{
+  id:number
+  libelle:string
+  quantitestock:number
+  article:Article[]
+  categorie:Categorie
 }
 export interface All{
     categorie:Categorie[]
     fournisseur:Fournisseur[]
+    articleVente:Vente[]
+    article:Article[]
 }
 export interface Root {
-    data: Daum[]
-    links: Link[]
+    article: Article[]
   }
   
   export interface Daum {
-    data:Article
+    id: number
+    libelle: string
+    prix: number
+    stock: number
+    reference: string
+    photo: string
+    fournisseur: Fournisseur[]
+    categorie?: Categorie
   }
+  
+
   
 //   export interface Fournisseur {
 //     id: number
@@ -39,12 +60,10 @@ export interface Root {
     fournisseur_id: number
   }
   
-//   export interface Categorie {
-//     id: number
-//     libelle: string
-//     type: string
-//   }
-  
+export interface objet{
+  libelleArticle:string
+  quantite:number
+}
   export interface Link {
     url?: string
     label: string

@@ -1,3 +1,18 @@
-<td >robes</td>
-<td>12</td>
-<td>tissu-12; boutton-5;fil-10</td>
+<td >{{vente.libelle}}</td>
+<td>{{vente.quantitestock}}</td>
+
+<td >
+    <span *ngFor="let conf of vente.confections ">
+         {{conf.libelle+"-"+conf.quantite}};
+    </span>
+</td>
+<td><button mat-raised-button color="primary" type="submit" (click)="updateArticle(vente)">
+    <mat-icon >edit</mat-icon>
+    </button>
+</td>
+<!-- <td><button type="submit"><i class="fas fa-trash text-danger"></i></button></td> -->
+<td><button mat-raised-button color="warn" aria-label="Example icon button with a delete icon" (click)="supprimerArticle(vente)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</td>
+

@@ -39,20 +39,29 @@ export class ArticleComponent implements OnInit{
   getDataAll(){ 
     this.apiArticle.getAll().subscribe((response:Response<All>)=>{
       this.reponse=response
+      console.log(response);
+      
       this.dataCategorie=response.data.categorie
         this.dataArticle=response.data.article
         this.dataFournisseur=response.data.fournisseur
+        console.log(this.dataCategorie);
+        
     })
   }
   // ======================== Ajouter et Modifier un Article ======================================
   receiveData(data: Article) {
    if(!this.isEditer){
-     this.apiArticle.createArticle(data)
-       .subscribe(response => {
-         console.log('Données sont envoyées  avec succès :', response);
-         this.notification(response?.message)
-       });
-       return 
+     this.apiArticle.createArticle(data).subscribe({
+        next: (response) => {
+          if(response.status){
+            this.dataArticle.unshift(response.data)
+            console.log('Données sont envoyées  avec succès :', response);
+            // this.formulaire.reset();
+            
+          }
+          this.notification(response?.message)
+       }});
+       return
    }
     this.apiArticle.editArticle(data,this.idEdit).subscribe({
       next:(reponse)=>{
@@ -60,6 +69,9 @@ export class ArticleComponent implements OnInit{
         this.notification(reponse?.message)     
       }
     })
+  }
+  resetForm(){
+    this.formulaire.reset();
   }
   handlePageChange(page:number) {
     this.currentPage = page;
@@ -76,10 +88,22 @@ export class ArticleComponent implements OnInit{
   recevoirDataEditer(event:Article,forme:FormComponent)
   {
     this.editerArticle=event;
+    forme.searchResults=[]
+    forme.selectedFournisseurs=[]
+    // forme.selectcategorie=event.categorie?.libelle;
     forme.formulaire.patchValue(event)
-    // forme.uploadedImageUrl=event.photo;
-    forme.formulaire.patchValue({photo:event.photo})
+    for (const iterator of event.Fournisseur ||[]) {
+      // forme.searchResults?.push(iterator)
+      forme.selectedFournisseurs.push(iterator)
+        const valeurFourn=forme.searchResults.indexOf(iterator);
+    if(valeurFourn!==-1){
+      forme.searchResults.splice(valeurFourn,1)
+    }
     
+    }   
+    forme.formulaire.get('categorie')?.setValue(event.categorie?.libelle)
+    forme.uploadedImageUrl =event.photo !;   
+    forme.formulaire.patchValue({photo:event.photo})
     forme.isEditer=true
     console.log(this.isEditer);
     this.idEdit=event.id

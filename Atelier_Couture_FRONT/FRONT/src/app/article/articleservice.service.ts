@@ -12,7 +12,7 @@ export class ArticleserviceService {
 
   
   getAll():Observable<Response<All>>{
-    return  this._http.get<Response<All>>(environement.urlart+'all');
+    return  this._http.get<Response<All>>(environement.urlart+'article/categ/four');
   }
   createArticle(data:Article):Observable<Response<Article>>{
     return this._http.post<Response<Article>>(environement.urlart+'article/ajouter',data,environement.heard)

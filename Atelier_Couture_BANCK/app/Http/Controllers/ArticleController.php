@@ -18,11 +18,13 @@ use Symfony\Component\HttpFoundation\Response;
 class ArticleController extends Controller
 {   
     public function all(){
-        $categorie=Categorie::all();
+        $article=Article::orderBy('created_at')->get();
+        $categorie=Categorie::where('type','confection')->get();
         $fournisseur=Fournisseur::all();
+       
         return response()->json([
-            "message"=>"",
           "data"=>[
+            "article"=>ArticleResource::collection($article),
             "categorie"=> $categorie,
             "fournisseur"=>$fournisseur
           ]
@@ -30,13 +32,12 @@ class ArticleController extends Controller
         
     }
     public function AllArticle(){
-        $articles = Article::with('fournisseurs', 'categorie')->paginate(3);
+        $articles = Article::with('fournisseurs', 'categorie')->get();
 
         return response()->json([
-            "message"=>"",
-            "data"=>[
-                $articles
-            ]
+           "data"=>[
+            "article"=> ArticleResource::collection($articles)
+           ]
         ]);
     }
 
@@ -54,7 +55,7 @@ class ArticleController extends Controller
             "reference"=>"REF_".strtoupper(str::substr($request->libelle,3))."_".strtoupper($libelleCateg)."_".$count+1
         ]);
             $article->save();
-            $fournisseur=$article->fournisseurs()->attach($request->fournisseurs);
+            $fournisseur=$article->fournisseurs()->attach($request->fournisseur);
             return response()->json([
                 "status"=>200,
                 "message"=>"les données sont insérées avec succès",

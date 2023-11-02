@@ -5,4 +5,14 @@
     width: auto;
     height: auto;
   }
-  
+
+.bs-success-bg-subtle {
+  width: 900px;
+  height: 50px;
+  font-size: 23px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  column-rule: black;
+  background-color: rgba(71, 235, 0, 0.4); 
+}

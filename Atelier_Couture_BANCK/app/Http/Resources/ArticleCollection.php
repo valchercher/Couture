@@ -9,13 +9,7 @@ class ArticleCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection,
-            'pagination' => [
-                'current_page' => $this->currentPage,
-                'last_page' => $this->lastPage,
-                'prev_page_url' => $this->previousPageUrl,
-                'next_page_url' => $this->nextPageUrl,
-                'total' => $this->total,
-            ],
+            'links'=>['meta']['link']
         ];
     }
 }

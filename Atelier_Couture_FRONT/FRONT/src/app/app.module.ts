@@ -17,6 +17,9 @@ import { VenteComponent } from './vente/vente.component';
 import { FormvComponent } from './vente/formv/formv.component';
 import { ListervComponent } from './vente/listerv/listerv.component';
 import { ItemvComponent } from './vente/listerv/itemv/itemv.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import{MatTableModule}from'@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +41,12 @@ import { ItemvComponent } from './vente/listerv/itemv/itemv.component';
     HttpClientModule,
     NgxPaginationModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule
+  
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
